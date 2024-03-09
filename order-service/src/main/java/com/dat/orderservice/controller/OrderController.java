@@ -13,14 +13,14 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public String placeOrder(@RequestBody OrderRequest orderRequest){
         try {
             orderService.placeOrder(orderRequest);
             return "Order placed successfully";
         }
         catch (Exception e){
-            return "product is not in stock, please try again later";
+            return "Error occur";
         }
     }
 }
