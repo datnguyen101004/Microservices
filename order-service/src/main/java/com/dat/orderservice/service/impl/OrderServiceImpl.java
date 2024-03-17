@@ -1,6 +1,5 @@
 package com.dat.orderservice.service.impl;
 
-import com.dat.orderservice.config.WebClientConfig;
 import com.dat.orderservice.dto.InventoryResponse;
 import com.dat.orderservice.dto.OrderLineItemsDto;
 import com.dat.orderservice.dto.OrderRequest;
