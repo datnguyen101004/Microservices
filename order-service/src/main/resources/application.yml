@@ -30,7 +30,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: "*"
   endpoint:
     health:
       show-details: always
@@ -41,11 +41,20 @@ resilience4j:
     instances:
       inventory:
         registerHealthIndicator: true
-        eventConsumerBufferSize: 10
+        eventConsumerBufferSize: 10 #store maximum 10 events at a time
         failureRateThreshold: 50
-        minimumNumberOfCalls: 5
+        minimumNumberOfCalls: 5 #if less 5 events status is not open
         automaticTransitionFromOpenToHalfOpenEnabled: true
         waitDurationInOpenState: 5s
         permittedNumberOfCallsInHalfOpenState: 3
-        slidingWindowSize: 10
+        slidingWindowSize: 10 #outcomes of last 10 requests is tracking, older request is drop out
         slidingWindowType: COUNT_BASED
+  timelimiter:
+    instances:
+      inventory:
+        timeout-duration: 3s
+  retry:
+    instances:
+      inventory:
+        max-attempts: 3
+        wait-duration: 5s # time between 2 attempt is 5s
